@@ -12,11 +12,10 @@ public class ComplexCalculator {
         ComplexCalculator.reader();
     }
 
-    public static void calculator(String line){
+    public static void calculator(String line, Pilha calculator){
         int n;
         float a,b;
         ComplexNumber c1,c2;
-        Pilha calculator = new Pilha();
         try{
             String[] str = (line.split(" "));
             b = Integer.parseInt(str[0]);
@@ -130,10 +129,11 @@ public class ComplexCalculator {
 
     public static void reader(){
         Path path = Paths.get("Trabalho\\teste.txt");
+        Pilha calc = new Pilha();
         try (Scanner sc = new Scanner(Files.newBufferedReader(path, StandardCharsets.UTF_8))){
             while (sc.hasNext()){
                 String linha = sc.nextLine();
-                calculator(linha);
+                calculator(linha,calc);
             }
         }catch (IOException x){
             System.err.format("Erro de E/S: %s%n", x);

@@ -3,6 +3,10 @@ import java.util.*;
 import chainstructure.Pilha;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 public class ComplexCalculator {
     public static void main(String[] args) {
         ComplexCalculator.reader();
@@ -14,8 +18,10 @@ public class ComplexCalculator {
         ComplexNumber c1,c2;
         Pilha calculator = new Pilha();
         try{
-            n = Integer.parseInt(line);
-            calculator.push(n);
+            String[] str = (line.split(" "));
+            b = Integer.parseInt(str[0]);
+            a = Integer.parseInt(str[1]);
+            calculator.push(line);
         }catch(NumberFormatException ex){
             switch(line){
                 case "+":
@@ -123,20 +129,14 @@ public class ComplexCalculator {
     }
 
     public static void reader(){
-        BufferedReader leitor;
-        Scanner in = new Scanner(System.in);
-        try {
-            System.out.print("Teste: ");
-            String arquivo = in.nextLine();
-            leitor = new BufferedReader(new FileReader(arquivo));
-            String line = leitor.readLine();
-            while (line != null) {
-                line = leitor.readLine();
-                if (line.equals("quit")){System.exit(1);}
-                calculator(line);
+        Path path = Paths.get("Trabalho\\teste.txt");
+        try (Scanner sc = new Scanner(Files.newBufferedReader(path, StandardCharsets.UTF_8))){
+            while (sc.hasNext()){
+                String linha = sc.nextLine();
+                calculator(linha);
             }
-        } catch(FileNotFoundException ex){System.out.println("Not found");}
-        catch (IOException ex) {throw new RuntimeException(ex);}
+        }catch (IOException x){
+            System.err.format("Erro de E/S: %s%n", x);
+        }
     }
-
 }

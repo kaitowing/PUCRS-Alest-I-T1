@@ -13,13 +13,12 @@ public class ComplexCalculator {
     }
 
     public static void calculator(String line, Pilha calculator){
-        int n;
         float a,b;
         ComplexNumber c1,c2;
         try{
             String[] str = (line.split(" "));
-            b = Integer.parseInt(str[0]);
-            a = Integer.parseInt(str[1]);
+            b = Float.parseFloat(str[0]);
+            a = Float.parseFloat(str[1]);
             calculator.push(line);
         }catch(NumberFormatException ex){
             switch(line){
@@ -94,41 +93,41 @@ public class ComplexCalculator {
     }
 
     public static ComplexNumber popNum(Pilha calculator){
-        int a,b;
+        float a,b;
 		ComplexNumber complex2;
         String[] split = ((String) calculator.pop()).split(" ");
-		b = Integer.parseInt(split[0]);
-		a = Integer.parseInt(split[1]);
+		b = Float.parseFloat(split[1]);
+		a = Float.parseFloat(split[0]);
 		complex2 = new ComplexNumber(a, b);
         return complex2;
     }
 
     public static void add(Pilha calculator,ComplexNumber complex1,ComplexNumber complex2){
 		complex1.add(complex2);
-		String aux = (int) complex1.newComplex.getA() + " " + (int) complex1.newComplex.getB() ;
+		String aux = (Float) complex1.newComplex.getA() + " " + (Float) complex1.newComplex.getB() ;
 		calculator.push(aux);
     }
 
     public static void sub(Pilha calculator,ComplexNumber complex1,ComplexNumber complex2){
 		complex1.subtract(complex2);
-		String aux = (int) complex1.newComplex.getA() + " " + (int) complex1.newComplex.getB() ;
+		String aux = (Float) complex1.newComplex.getA() + " " + (Float) complex1.newComplex.getB() ;
 		calculator.push(aux);
     }
 
     public static void div(Pilha calculator,ComplexNumber complex1,ComplexNumber complex2){
 		complex1.divide(complex2);
-		String aux = (int) complex1.newComplex.getA() + " " + (int) complex1.newComplex.getB() ;
+		String aux = (Float) complex1.newComplex.getA() + " " + (Float) complex1.newComplex.getB() ;
 		calculator.push(aux);
     }
 
     public static void mult(Pilha calculator,ComplexNumber complex1,ComplexNumber complex2){
 		complex1.multiply(complex2);
-		String aux = (int) complex1.newComplex.getA() + " " + (int) complex1.newComplex.getB() ;
+		String aux = (Float) complex1.newComplex.getA() + " " + (Float) complex1.newComplex.getB() ;
 		calculator.push(aux);
     }
 
     public static void reader(){
-        Path path = Paths.get("Trabalho\\teste.txt");
+        Path path = Paths.get("teste.txt");
         Pilha calc = new Pilha();
         try (Scanner sc = new Scanner(Files.newBufferedReader(path, StandardCharsets.UTF_8))){
             while (sc.hasNext()){

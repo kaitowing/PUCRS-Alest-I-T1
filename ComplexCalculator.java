@@ -56,6 +56,8 @@ public class ComplexCalculator {
                 break;
 
                 case "inv":
+                    c1 = popNum(calculator);
+                    inv(calculator, c1);
                 break;
 
                 case "conj":
@@ -66,7 +68,8 @@ public class ComplexCalculator {
                 break;
 
                 case "abs":
-
+                    c1 = popNum(calculator);
+                    abs(calculator, c1);
                 break;
 
                 case "pop":
@@ -123,6 +126,24 @@ public class ComplexCalculator {
     public static void mult(Pilha calculator,ComplexNumber complex1,ComplexNumber complex2){
 		complex1.multiply(complex2);
 		String aux = (Float) complex1.newComplex.getA() + " " + (Float) complex1.newComplex.getB() ;
+		calculator.push(aux);
+    }
+
+    public static void inv(Pilha calculator,ComplexNumber complex1){
+        ComplexNumber invert = new ComplexNumber(1, 0);
+		invert.divide(complex1);
+		String aux = (Float) complex1.newComplex.getA() + " " + (Float) complex1.newComplex.getB() ;
+		calculator.push(aux);
+    }
+
+    public static void abs(Pilha calculator,ComplexNumber complex1){
+        double absolute = 0;
+        float a = complex1.getA();
+        float b = complex1.getB();
+
+        absolute = Math.sqrt((a*a) + (b*b));
+
+		String aux = Double.toString(absolute);
 		calculator.push(aux);
     }
 

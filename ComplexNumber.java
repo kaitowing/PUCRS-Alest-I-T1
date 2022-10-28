@@ -41,7 +41,7 @@ class ComplexNumber{
 		newB = ((b * otherNumber.getA()) - (a * otherNumber.getB())) / ((otherNumber.getA() * otherNumber.getA()) + (otherNumber.getB() * otherNumber.getB()));
 		newComplex = new ComplexNumber(newA, newB);
 		return newComplex;
-	}	 
+	}
 	public String toString(){
 		return "(" + a + ") + (" + b + ")i";
 	}

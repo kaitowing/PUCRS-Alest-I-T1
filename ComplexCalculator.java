@@ -56,8 +56,12 @@ public class ComplexCalculator {
                 break;
 
                 case "inv":
-                    c1 = popNum(calculator);
-                    inv(calculator, c1);
+                    try {
+                        c1 = popNum(calculator);
+                        inv(calculator, c1);
+                    } catch (Exception e) {
+                        break;
+                    }
                 break;
 
                 case "conj":
@@ -131,7 +135,7 @@ public class ComplexCalculator {
 
     public static void inv(Pilha calculator,ComplexNumber complex1){
         ComplexNumber invert = new ComplexNumber(1, 0);
-		invert.divide(complex1);
+		complex1.divide(invert);
 		String aux = (Float) complex1.newComplex.getA() + " " + (Float) complex1.newComplex.getB() ;
 		calculator.push(aux);
     }
@@ -148,7 +152,7 @@ public class ComplexCalculator {
     }
 
     public static void reader(){
-        Path path = Paths.get("teste.txt");
+        Path path = Paths.get("Trabalho\\teste.txt");
         Pilha calc = new Pilha();
         try (Scanner sc = new Scanner(Files.newBufferedReader(path, StandardCharsets.UTF_8))){
             while (sc.hasNext()){

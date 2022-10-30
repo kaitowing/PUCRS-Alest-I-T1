@@ -154,14 +154,21 @@ public class ComplexCalculator {
     public static void reader(){
         Path path = Paths.get("Trabalho\\teste.txt");
         Pilha calc = new Pilha();
+        int tamMax = calc.size();
         try (Scanner sc = new Scanner(Files.newBufferedReader(path, StandardCharsets.UTF_8))){
             while (sc.hasNext()){
                 String linha = sc.nextLine();
                 calculator(linha,calc);
+                if(calc.size() > tamMax){
+                    tamMax = calc.size();
+                }
             }
             for (int i = 0; i < calc.size(); i++) {
                 System.out.println(calc.pop());
             }
+            System.out.println("Tamanho máximo atingido pela pilha: " + tamMax);
+            System.out.println("Tamanho da pilha: " + calc.size());
+            System.out.println("Último valor da pilha: " + calc.top());
         }catch (IOException x){
             System.err.format("Erro de E/S: %s%n", x);
         }

@@ -188,7 +188,7 @@ public class ComplexCalculator {
     }
 
     public static void reader(){
-        for (int j = 1; j < 4; j++) {
+        for (int j = 1; j < 9; j++) {
             System.out.println("\n-----------------------------------");
             System.out.println("Teste "+ j + "\n");            
             Path path = Paths.get("teste" + j + ".txt");

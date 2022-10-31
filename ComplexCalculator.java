@@ -102,11 +102,17 @@ public class ComplexCalculator {
     public static ComplexNumber popNum(Pilha calculator){
         float a,b;
 		ComplexNumber complex2;
-        String[] split = ((String) calculator.pop()).split(" ");
-		b = Float.parseFloat(split[1]);
-		a = Float.parseFloat(split[0]);
-		complex2 = new ComplexNumber(a, b);
-        return complex2;
+        while(true){
+            try {
+                String[] split = ((String) calculator.pop()).split(" ");
+                b = Float.parseFloat(split[1]);
+                a = Float.parseFloat(split[0]);
+                complex2 = new ComplexNumber(a, b);
+                return complex2;    
+            } catch (Exception e) {
+                
+            }
+        }
     }
 
     public static void add(Pilha calculator,ComplexNumber complex1,ComplexNumber complex2){

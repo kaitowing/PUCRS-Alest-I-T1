@@ -207,7 +207,7 @@ public class ComplexCalculator {
                     System.out.println("Pilha vazia.");
                 }else{
                     System.out.println("Tamanho da pilha: " + calc.size());
-                    System.out.println("Último valor da pilha: " + calc.pop() + "i");
+                    System.out.println("Último valor da pilha: " + calc.pop());
                 }
             }catch (IOException x){
                 System.err.format("Erro de E/S: %s%n", x);

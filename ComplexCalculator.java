@@ -179,7 +179,7 @@ public class ComplexCalculator {
                 System.out.println("Último valor da pilha: " + calc.top());
             }
             while(!calc.isEmpty()){
-                System.out.println(calc.pop());
+                calc.pop();
             }
         }catch (IOException x){
             System.err.format("Erro de E/S: %s%n", x);

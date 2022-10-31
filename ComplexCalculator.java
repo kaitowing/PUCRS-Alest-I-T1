@@ -56,6 +56,12 @@ public class ComplexCalculator {
                 break;
 
                 case "inv":
+                    try {
+                        c1 = popNum(calculator);
+                        inv(calculator, c1);
+                    } catch (Exception e) {
+                        break;
+                    }
                 break;
 
                 case "conj":
@@ -66,7 +72,8 @@ public class ComplexCalculator {
                 break;
 
                 case "abs":
-
+                    c1 = popNum(calculator);
+                    abs(calculator, c1);
                 break;
 
                 case "pop":
@@ -95,11 +102,19 @@ public class ComplexCalculator {
     public static ComplexNumber popNum(Pilha calculator){
         float a,b;
 		ComplexNumber complex2;
-        String[] split = ((String) calculator.pop()).split(" ");
-		b = Float.parseFloat(split[1]);
-		a = Float.parseFloat(split[0]);
-		complex2 = new ComplexNumber(a, b);
-        return complex2;
+        while(true){
+            String[] split = ((String) calculator.pop()).split(" ");
+            if(split.length!=2){
+                b = 0;
+                a = Float.parseFloat(split[0]);
+                complex2 = new ComplexNumber(a, b);
+            }else{
+                b = Float.parseFloat(split[1]);
+                a = Float.parseFloat(split[0]);
+                complex2 = new ComplexNumber(a, b);
+            }
+                return complex2;    
+        }
     }
 
     public static void add(Pilha calculator,ComplexNumber complex1,ComplexNumber complex2){
@@ -126,16 +141,45 @@ public class ComplexCalculator {
 		calculator.push(aux);
     }
 
+    public static void inv(Pilha calculator,ComplexNumber complex1){
+        ComplexNumber invert = new ComplexNumber(1, 0);
+		complex1.divide(invert);
+		String aux = (Float) complex1.newComplex.getA() + " " + (Float) complex1.newComplex.getB() ;
+		calculator.push(aux);
+    }
+
+    public static void abs(Pilha calculator,ComplexNumber complex1){
+        double absolute = 0;
+        float a = complex1.getA();
+        float b = complex1.getB();
+
+        absolute = Math.sqrt((a*a) + (b*b));
+
+		String aux = Double.toString(absolute);
+		calculator.push(aux);
+    }
+
     public static void reader(){
-        Path path = Paths.get("teste.txt");
+        Path path = Paths.get("Trabalho\\teste.txt");
         Pilha calc = new Pilha();
+        int tamMax = calc.size();
         try (Scanner sc = new Scanner(Files.newBufferedReader(path, StandardCharsets.UTF_8))){
             while (sc.hasNext()){
                 String linha = sc.nextLine();
                 calculator(linha,calc);
+                if(calc.size() > tamMax){
+                    tamMax = calc.size();
+                }
             }
-            for (int i = 0; i < calc.size(); i++) {
-                System.out.println(calc.pop());
+            System.out.println("Tamanho máximo atingido pela pilha: " + tamMax);
+            if(calc.isEmpty()){
+                System.out.println("Pilha vazia.");
+            }else{
+                System.out.println("Tamanho da pilha: " + calc.size());
+                System.out.println("Último valor da pilha: " + calc.top());
+            }
+            while(!calc.isEmpty()){
+                calc.pop();
             }
         }catch (IOException x){
             System.err.format("Erro de E/S: %s%n", x);

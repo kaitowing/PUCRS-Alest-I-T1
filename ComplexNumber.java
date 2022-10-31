@@ -1,9 +1,13 @@
-class ComplexNumber{
-	private float a;
-	private float b;
+public class ComplexNumber{
+
+	ComplexNumber newComplex;
+
 	private float newA;
 	private float newB;
-	ComplexNumber newComplex;
+
+	private float a;
+	private float b;
+
 	public ComplexNumber(float a, float b){
 		this.a = a;
 		this.b = b;
@@ -14,31 +18,31 @@ class ComplexNumber{
 	public float getB(){
 		return b;
 	}
-	//Addition	
-	public ComplexNumber add(ComplexNumber otherNumber){
-		newA = a + otherNumber.getA();
-		newB = b + otherNumber.getB();
+
+	public ComplexNumber add(ComplexNumber num){
+		newA = a + num.getA();
+		newB = b + num.getB();
 		newComplex = new ComplexNumber(newA, newB);
 		return newComplex;
 	}
-	//Subtraction
-	public ComplexNumber subtract(ComplexNumber otherNumber){
-		newA = a - otherNumber.getA();
-		newB = b - otherNumber.getB();
+
+	public ComplexNumber subtract(ComplexNumber num){
+		newA = a - num.getA();
+		newB = b - num.getB();
 		newComplex = new ComplexNumber(newA, newB);
 		return newComplex;
 	}
-	//Multiplication
-	public ComplexNumber multiply(ComplexNumber otherNumber){
-		newA = (a * otherNumber.getA()) - (b * otherNumber.getB());
-		newB = (b * otherNumber.getA()) + (a * otherNumber.getB());
+
+	public ComplexNumber multiply(ComplexNumber num){
+		newA = (a * num.getA()) - (b * num.getB());
+		newB = (b * num.getA()) + (a * num.getB());
 		newComplex = new ComplexNumber(newA, newB);
 		return newComplex;
 	}
-	//Division
-	public ComplexNumber divide(ComplexNumber otherNumber){
-		newA = ((a * otherNumber.getA()) + (b * otherNumber.getB())) / ((otherNumber.getA() * otherNumber.getA()) + (otherNumber.getB() * otherNumber.getB()));
-		newB = ((b * otherNumber.getA()) - (a * otherNumber.getB())) / ((otherNumber.getA() * otherNumber.getA()) + (otherNumber.getB() * otherNumber.getB()));
+
+	public ComplexNumber divide(ComplexNumber num){
+		newA = ((a * num.getA()) + (b * num.getB())) / ((num.getA() * num.getA()) + (num.getB() * num.getB()));
+		newB = ((b * num.getA()) - (a * num.getB())) / ((num.getA() * num.getA()) + (num.getB() * num.getB()));
 		newComplex = new ComplexNumber(newA, newB);
 		return newComplex;
 	}

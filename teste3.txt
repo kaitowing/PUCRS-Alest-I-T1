@@ -1,0 +1,9 @@
+20 30
+swap
+inv
+dup
+pop
+abs
+conj
++
+chs

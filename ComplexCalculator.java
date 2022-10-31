@@ -23,27 +23,51 @@ public class ComplexCalculator {
         }catch(NumberFormatException ex){
             switch(line){
                 case "+":
-                   c1 = popNum(calculator);
-                   c2 = popNum(calculator);
-                   add(calculator, c1, c2);
+                c1 = new ComplexNumber(0, 0);
+                try {
+                    c1 = popNum(calculator);
+                    c2 = popNum(calculator);
+                    add(calculator, c1, c2);
+            
+                } catch (Exception e) {
+                    calculator.push(c1.getA() + " " + c1.getB());
+                }
                 break;
 
                 case "-":
+                c1 = new ComplexNumber(0, 0);
+                try {
                     c1 = popNum(calculator);
                     c2 = popNum(calculator);
                     sub(calculator, c1, c2);
+            
+                } catch (Exception e) {
+                    calculator.push(c1.getA() + " " + c1.getB());
+                }
                 break;
 
                 case "*":
+                c1 = new ComplexNumber(0, 0);
+                try {
                     c1 = popNum(calculator);
                     c2 = popNum(calculator);
                     mult(calculator, c1, c2);
+            
+                } catch (Exception e) {
+                    calculator.push(c1.getA() + " " + c1.getB());
+                }
                 break;
 
                 case "/":
+                c1 = new ComplexNumber(0, 0);
+                try {
                     c1 = popNum(calculator);
                     c2 = popNum(calculator);
                     div(calculator, c1, c2);
+            
+                } catch (Exception e) {
+                    calculator.push(c1.getA() + " " + c1.getB());
+                }
                 break;
 
                 case "chs":
@@ -87,14 +111,18 @@ public class ComplexCalculator {
                 break;
 
                 case "swap":
+                if(!calculator.isEmpty()){
+                    c1 = new ComplexNumber(0, 0);
                     try{
                         c1 = popNum(calculator);
                         c2 = popNum(calculator);
                         calculator.push(c1.getA() + " " + c1.getB());
                         calculator.push(c2.getA() + " " + c2.getB());
                     }catch(Exception e){
+                        calculator.push(c1.getA() + " " + c1.getB());
                         break;
                     }
+                }
             }
         }
     }
@@ -160,29 +188,30 @@ public class ComplexCalculator {
     }
 
     public static void reader(){
-        Path path = Paths.get("Trabalho\\teste.txt");
-        Pilha calc = new Pilha();
-        int tamMax = calc.size();
-        try (Scanner sc = new Scanner(Files.newBufferedReader(path, StandardCharsets.UTF_8))){
-            while (sc.hasNext()){
-                String linha = sc.nextLine();
-                calculator(linha,calc);
-                if(calc.size() > tamMax){
-                    tamMax = calc.size();
+        for (int j = 1; j < 4; j++) {
+            System.out.println("\n-----------------------------------");
+            System.out.println("Teste "+ j + "\n");            
+            Path path = Paths.get("teste" + j + ".txt");
+            Pilha calc = new Pilha();
+            int tamMax = calc.size();
+            try (Scanner sc = new Scanner(Files.newBufferedReader(path, StandardCharsets.UTF_8))){
+                while (sc.hasNext()){
+                    String linha = sc.nextLine();
+                    calculator(linha,calc);
+                    if(calc.size() > tamMax){
+                        tamMax = calc.size();
+                    }
                 }
+                System.out.println("Tamanho máximo atingido pela pilha: " + tamMax);
+                if(calc.isEmpty()){
+                    System.out.println("Pilha vazia.");
+                }else{
+                    System.out.println("Tamanho da pilha: " + calc.size());
+                    System.out.println("Último valor da pilha: " + calc.pop() + "i");
+                }
+            }catch (IOException x){
+                System.err.format("Erro de E/S: %s%n", x);
             }
-            System.out.println("Tamanho máximo atingido pela pilha: " + tamMax);
-            if(calc.isEmpty()){
-                System.out.println("Pilha vazia.");
-            }else{
-                System.out.println("Tamanho da pilha: " + calc.size());
-                System.out.println("Último valor da pilha: " + calc.top());
-            }
-            while(!calc.isEmpty()){
-                calc.pop();
-            }
-        }catch (IOException x){
-            System.err.format("Erro de E/S: %s%n", x);
         }
     }
 }

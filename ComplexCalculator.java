@@ -175,8 +175,12 @@ public class ComplexCalculator {
                 }
             }
             System.out.println("Tamanho máximo atingido pela pilha: " + tamMax);
-            System.out.println("Tamanho da pilha: " + calc.size());
-            System.out.println("Último valor da pilha: " + calc.top());
+            if(calc.isEmpty()){
+                System.out.println("Pilha vazia.");
+            }else{
+                System.out.println("Tamanho da pilha: " + calc.size());
+                System.out.println("Último valor da pilha: " + calc.top());
+            }
             for (int i = 0; i < calc.size(); i++) {
                 System.out.println(calc.pop());
             }

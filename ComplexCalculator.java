@@ -101,22 +101,19 @@ public class ComplexCalculator {
 
     public static ComplexNumber popNum(Pilha calculator){
         float a,b;
-        Pilha aux = new Pilha();
 		ComplexNumber complex2;
         while(true){
             String[] split = ((String) calculator.pop()).split(" ");
-            try {
+            if(split.length!=2){
+                b = 0;
+                a = Float.parseFloat(split[0]);
+                complex2 = new ComplexNumber(a, b);
+            }else{
                 b = Float.parseFloat(split[1]);
                 a = Float.parseFloat(split[0]);
                 complex2 = new ComplexNumber(a, b);
-                for (int i = 0; i < aux.size(); i++) {
-                    calculator.push(aux.pop());
-                }
-                return complex2;    
-            } catch (Exception e) {
-                if(split.length == 1)
-                aux.push(split[0]);
             }
+                return complex2;    
         }
     }
 
@@ -181,7 +178,7 @@ public class ComplexCalculator {
                 System.out.println("Tamanho da pilha: " + calc.size());
                 System.out.println("Último valor da pilha: " + calc.top());
             }
-            for (int i = 0; i < calc.size(); i++) {
+            while(!calc.isEmpty()){
                 System.out.println(calc.pop());
             }
         }catch (IOException x){
